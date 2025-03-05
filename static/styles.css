@@ -1,0 +1,34 @@
+/* Customize as needed for your specific design preferences */
+body {
+    font-family: sans-serif;
+    height: 100%; /* Added for fixed footer */
+  }
+  
+  .container-fluid {
+    height: 100%; /* Added for fixed footer */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  footer {
+    position: fixed; /* Fixed footer styling */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.8rem; /* Footer text size */
+  }
+  
+  .display-4 {
+    color: #333;
+  }
+  
+  .btn-primary {
+    background-color: #3882f3;
+    border-color: #3882f3;
+  } 
+  
+  .btn-outline-primary {
+    color: #3882f3;
+    border-color: #3882f3;
+  }
+  

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drowsiness Alert</title>
+  </head>
+  <body>
+    <h1>Drowsiness Alert</h1>
+    <p>Dear {{ driver.user.username }},</p>
+    <p>
+      Our system has detected signs of drowsiness during your drive on {{ alert.timestamp|date:"F j, Y, g:i a" }}. We strongly recommend taking a break and getting some
+      rest to ensure your safety and the safety of others on the road.
+    </p>
+    <p>Stay alert, stay safe!</p>
+    <p>Best regards,<br />DrowsiSense Team</p>
+  </body>
+</html>

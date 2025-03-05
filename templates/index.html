@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ app_name }} | Welcome</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      main {
+        flex-grow: 1;
+      }
+      .landing-card {
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+      .btn-primary {
+        background-color: #667eea;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+      }
+      .btn-primary:hover {
+        background-color: #5469d4;
+      }
+      .btn-outline-primary {
+        border-color: #667eea;
+        color: #667eea;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .btn-outline-primary:hover {
+        background-color: #667eea;
+        color: #fff;
+      }
+      footer {
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="py-3">
+      <div class="container">
+        <h1 class="display-4 mb-0 text-center">{{ app_name }}</h1>
+      </div>
+    </header>
+
+    <main class="d-flex justify-content-center align-items-center">
+      <div class="landing-card">
+        <h1 class="text-center display-4 mb-4">Welcome to {{ app_name }}!</h1>
+        <p class="text-center lead mb-5">
+          Welcome to DrowsiSense, where innovation meets vigilance. Our
+          cutting-edge drowsiness detection system is designed to unveil the
+          subtle signs of fatigue, ensuring you stay alert and focused. Discover
+          the power of DrowsiSense as we redefine the boundaries of staying
+          awake and aware.
+        </p>
+        <div class="d-flex justify-content-around">
+          <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg"
+            >Register</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-3">
+      <div class="container text-center">&copy; {{ year }} {{ app_name }}</div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL8duMOhJwxtlLOMGwCSySfCVwVvZ6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
