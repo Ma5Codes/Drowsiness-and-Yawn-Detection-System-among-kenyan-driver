@@ -1,0 +1,43 @@
+name: Run Drowsiness Detection
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.10"  # Use a stable version
+  PIP_NO_CACHE_DIR: 1      # Avoid caching issues
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set Up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Ensure this file exists with dependencies
+
+    - name: Run Drowsiness Detection
+      run: |
+        python manage.py  
+
+    - name: Upload Logs (if needed)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs
+        path: logs/  # Modify based on your project structure
