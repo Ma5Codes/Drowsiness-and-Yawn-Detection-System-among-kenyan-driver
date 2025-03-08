@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: drowsiness-backend
-    runtime: python
-    pythonVersion: 3.11.11
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-    startCommand: gunicorn drowsiness_project.wsgi:application
