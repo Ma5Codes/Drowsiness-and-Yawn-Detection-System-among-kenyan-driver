@@ -1,3 +1,4 @@
+
 import asyncio
 import os
 import cv2
@@ -27,7 +28,7 @@ def eye_aspect_ratio(eye):
 
     return ear
 
-
+#Extracting Eye Features
 def final_ear(shape):
     (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
     (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
@@ -41,7 +42,7 @@ def final_ear(shape):
     ear = (leftEAR + rightEAR) / 2.0
     return (ear, leftEye, rightEye)
 
-
+#Calculating Lip Distance(Yawn Detection)
 def lip_distance(shape):
     top_lip = shape[50:53]
     top_lip = np.concatenate((top_lip, shape[61:64]))
@@ -121,7 +122,8 @@ async def drowsiness_detection_task(
 
             lip = shape[48:60]
             cv2.drawContours(frame, [lip], -1, (0, 255, 0), 1)
-
+            
+            #Triggering Alerts
             if ear < ear_thresh:
                 COUNTER += 1
 
@@ -228,3 +230,102 @@ async def drowsiness_detection_task(
     cv2.destroyAllWindows()
     vs.stop()
     print("Drowsiness detection task completed.")
+
+# import asyncio
+# import os
+# import cv2
+# import dlib
+# import imutils
+# import pygame.mixer
+# import numpy as np
+# import subprocess
+# from imutils import face_utils
+# from scipy.spatial import distance as dist
+# from django.core.mail import EmailMessage
+# from django.template.loader import render_to_string
+# from .models import Alert, DriverProfile
+
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# def eye_aspect_ratio(eye):
+#     A = dist.euclidean(eye[1], eye[5])
+#     B = dist.euclidean(eye[2], eye[4])
+#     C = dist.euclidean(eye[0], eye[3])
+#     return (A + B) / (2.0 * C)
+
+# def final_ear(shape):
+#     (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
+#     (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
+#     leftEye = shape[lStart:lEnd]
+#     rightEye = shape[rStart:rEnd]
+#     return (eye_aspect_ratio(leftEye) + eye_aspect_ratio(rightEye)) / 2.0, leftEye, rightEye
+
+# def lip_distance(shape):
+#     top_lip = np.concatenate((shape[50:53], shape[61:64]))
+#     low_lip = np.concatenate((shape[56:59], shape[65:68]))
+#     return abs(np.mean(top_lip, axis=0)[1] - np.mean(low_lip, axis=0)[1])
+
+# async def drowsiness_detection_task(webcam_index, ear_thresh, ear_frames, yawn_thresh, driver_profile, driver_email):
+#     print("Drowsiness detection task started.")
+    
+#     pygame.mixer.init()
+#     music_path = os.path.join(BASE_DIR, "static/music.wav")
+#     if os.path.exists(music_path):
+#         pygame.mixer.music.load(music_path)
+#     else:
+#         print("Error: Audio file not found!")
+
+#     detector = cv2.CascadeClassifier("static/haarcascade_frontalface_default.xml")
+#     if detector.empty():
+#         print("Error: Face cascade file not found or invalid!")
+#         return
+
+#     predictor = dlib.shape_predictor("static/shape_predictor_68_face_landmarks.dat")
+
+#     vs = cv2.VideoCapture(webcam_index)
+#     if not vs.isOpened():
+#         print(f"Error: Unable to access webcam {webcam_index}")
+#         return
+
+#     await asyncio.sleep(1.0)
+
+#     COUNTER = 0
+
+#     while True:
+#         ret, frame = vs.read()
+#         if not ret:
+#             print("Error: No video frame received.")
+#             continue
+
+#         frame = imutils.resize(frame, width=450)
+#         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#         rects = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+#         for x, y, w, h in rects:
+#             rect = dlib.rectangle(int(x), int(y), int(x + w), int(y + h))
+#             shape = predictor(gray, rect)
+#             shape = face_utils.shape_to_np(shape)
+#             ear, leftEye, rightEye = final_ear(shape)
+#             distance = lip_distance(shape)
+
+#             if ear < ear_thresh:
+#                 COUNTER += 1
+#                 if COUNTER >= ear_frames:
+#                     pygame.mixer.music.play()
+#                     subprocess.run(["espeak", "Drowsiness detected!"])
+                    
+#                     # ✅ FIX: Directly save alert (no async_to_sync needed)
+#                     alert = Alert(driver=driver_profile, alert_type="drowsiness", description="Drowsiness detected!")
+#                     alert.save()
+
+#         cv2.imshow("Frame", frame)
+#         if cv2.waitKey(1) & 0xFF == ord("q"):
+#             break
+
+#         await asyncio.sleep(0)
+
+#     cv2.destroyAllWindows()
+#     vs.release()
+#     pygame.mixer.quit()
+#     print("Drowsiness detection task completed.")
+

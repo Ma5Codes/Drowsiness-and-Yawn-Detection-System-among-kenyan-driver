@@ -8,10 +8,12 @@
     <h1>Drowsiness Alert</h1>
     <p>Dear {{ driver.user.username }},</p>
     <p>
-      Our system has detected signs of drowsiness during your drive on {{ alert.timestamp|date:"F j, Y, g:i a" }}. We strongly recommend taking a break and getting some
-      rest to ensure your safety and the safety of others on the road.
+      Our system has detected signs of drowsiness during your drive on {{
+      alert.timestamp|date:"F j, Y, g:i a" }}. We strongly recommend taking a
+      break and getting some rest to ensure your safety and the safety of others
+      on the road.
     </p>
     <p>Stay alert, stay safe!</p>
-    <p>Best regards,<br />DrowsiSense Team</p>
+    <p>Best regards,<br />NoDozeDrive Team</p>
   </body>
 </html>

@@ -1,3 +1,4 @@
+
 import datetime
 import os
 from django.http import JsonResponse
@@ -32,7 +33,7 @@ running_task = None
 
 def home(request):
     context = {
-        "app_name": "DrowsiSense",
+        "app_name": "NoDozeDrive",
         "year": 2025,
     }
     return render(request, "index.html", context)
