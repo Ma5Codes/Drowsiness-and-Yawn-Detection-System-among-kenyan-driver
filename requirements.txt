@@ -1,6 +1,5 @@
 asgiref==3.7.2
 async-timeout==4.0.3
-backports.zoneinfo==0.2.1
 certifi==2023.11.17
 channels==4.0.0
 channels-redis==4.2.0
@@ -39,6 +38,4 @@ sqlparse==0.4.4
 typing-extensions==4.9.0
 urllib3==2.1.0
 whitenoise==6.6.0
-dotenv
-
-
+python-dotenv
