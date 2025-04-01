@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# Install system dependencies for dlib & OpenCV
-apt-get update && apt-get install -y \
-    cmake \
-    build-essential \
-    libopenblas-dev \
-    liblapack-dev \
-    libx11-dev \
-    libgtk-3-dev
+# Update package list
+apt-get update 
+
+# Install required system dependencies for dlib
+apt-get install -y cmake build-essential \
+    libopenblas-dev liblapack-dev libx11-dev \
+    libgtk-3-dev python3-dev
+
+# Upgrade pip
+pip install --upgrade pip 
 
 # Install Python dependencies
-pip install -r requirements.txt
+pip install --no-cache-dir -r requirements.txt
