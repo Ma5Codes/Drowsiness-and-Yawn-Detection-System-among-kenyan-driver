@@ -14,7 +14,8 @@ django-environ==0.11.2
 django-redis==5.4.0
 djangorestframework==3.14.0
 --extra-index-url https://pypi.anaconda.org/menpo/simple
-dlib-bin
+dlib==19.24.2
+
 eye-game==0.1
 face-recognition==1.3.0
 face-recognition-models==0.3.0
