@@ -1,5 +1,7 @@
 venv/
 new_venv/
 .env
+/drownsiness_project/__pycache__
+/drowsiness_app/__pycache__
 
 💆well here come the light in the end of the tunnell 💆
