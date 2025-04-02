@@ -17,6 +17,7 @@ pip install dlib-bin
 pip install gunicorn
 pip install Django
 pip install django-crispy-forms
+pip install channels
 pip install dotenv
 
 
