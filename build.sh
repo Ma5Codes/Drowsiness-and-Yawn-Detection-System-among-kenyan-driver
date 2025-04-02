@@ -18,6 +18,7 @@ pip install gunicorn
 pip install Django
 pip install django-crispy-forms
 pip install channels
+pip install psycopg2-binary
 pip install dotenv
 
 
